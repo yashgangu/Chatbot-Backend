@@ -1,9 +1,9 @@
 package com.geminichatbot.gemini.controller;
 
 import java.util.Map;
+import java.util.concurrent.CompletableFuture;
 
 import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -21,9 +21,13 @@ public class GeminiController {
 
 	private final GeminiService geminiService;
 	
+    
 	@PostMapping("/ask")
-	public String askGemini(@RequestBody Map<String, String> body) {
+	public CompletableFuture<String> askGemini(@RequestBody Map<String, String> body) {
+	    
 	    String prompt = body.get("prompt");
+	    
+	    
 	    return geminiService.askGemini(prompt);
 	}
 
